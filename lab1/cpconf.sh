@@ -1,1 +1,1 @@
-tail -1 twilio_sms_auth | xclip -selection clipboard
+tail -1 .twilio_sms_auth | xclip -selection clipboard
