@@ -1,0 +1,5 @@
+curl 'https://api.twilio.com/2010-04-01/Accounts/ACce8993ae53a62340cea590120d244dd1/Messages.json' -X POST \
+--data-urlencode 'To=+17204325329' \
+--data-urlencode 'MessagingServiceSid=MG10edf4d4b1c44edf2c0f9af284678012' \
+--data-urlencode 'Body=yeet' \
+-u ACce8993ae53a62340cea590120d244dd1:4d2dbb6caaf041b4c9f4956e67bd5c56

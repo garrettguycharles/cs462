@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pico Tester</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="vbox">
+        <div class="hbox">
+            <span>host:</span><input type="text" id="host" value="localhost">
+        </div>
+        <div class="hbox">
+            <span>port:</span><input type="text" id="port" value="3000">
+        </div>
+    </div>
+
+    <div class="vbox">
+        <div class="hbox">
+            <span>channel id (eci):</span><input type="text" id="eci">
+        </div>
+        <div class="hbox">
+            <span>event id (blank for none):</span><input type="text" id="eid">
+        </div>
+    </div>
+
+    <div class="hbox">
+        <span>event:</span><input type="text" id="domain" placeholder="domain">
+        <span>/</span><input type="text" id="type_name" placeholder="type/name">
+    </div>
+
+    <span id="url_preview"></span>
+
+    <button id="send_button">send event</button>
+
+    <div class="vbox">
+        <pre>
+            <code id="results">
+
+            </code>
+        </pre>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/src/js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+These Kirkland Signature 6.0 hearing aids use radio signals to talk to each other so that they can properly perform noise suppression, amplify sounds directionally, and coordinate the program mode they're in. In addition, they communicate with a phone (e.g. iPhone, Android) that can be used to control the volume, set the program, and adjust other parameters.
+
+With a partner, consider the following questions:
+
+What features and properties justify considering these hearing aids a distributed system?
+- There are two separate machines (three, when counting the audio source) which must communicate effectively in order for the sound to be synchronized and pleasant.
+Are they a decentralized or centralized system? Justify your answer.
+- I would say that these are a decentralized system.  While the audio signal that is being processed is the same, the phone doesn't have to know what the headphones are going to do with the audio stream once it is sent.
+- However, the communication between headphones borders upon being a centralized model, because they have to work together so closely that it is almost the same as saying that they are tightly coupled.  With that being said, they are definitely decentralized because really all that each headphone needs to know in order to work is the audio stream data, and perhaps a collaborative time offset for the purpose of playback synchronization.
+What role might latency play in their design?
+- See above answer.  Latency must be calculated and accounted for by some sort of time sync offset.

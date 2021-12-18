@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "pico-engine": "^1.1.1"
+  }
+}

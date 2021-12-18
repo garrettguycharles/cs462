@@ -1,0 +1,18 @@
+5.2: I don't get the same result on both channels because on one channel, the "echo" domain is blocked and on another channel, nothing is blocked.
+
+6.2: Here is my result from the deleted channel request:
+
+{
+  "error": "Error: ECI not found ckx9rffof000rbtpz7dema5i7"
+}
+
+This makes perfect sense because I deleted the channel with that ECI.
+
+7: I observe that the hello_world rule is invoked, because that is the one set up to handle the echo/hello request.
+8: Here is the response:
+{
+  "eid": "ckxb83ky9001ak6pzbkeb98pg",
+  "directives": []
+}
+
+This also makes sense because none of the rules matched up with the request I made, so it sent back basically an empty response.
