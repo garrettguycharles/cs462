@@ -1,4 +1,4 @@
-#Lab 1: Modules and External API calls
+# Lab 1: Modules and External API calls
 
 **Why does this assignment ask you to create a function for messages but an action for sending the SMS message? What's the difference?**
 * In pico KRL, functions are only used for GET operations.  For other operations which will change server-side data, a `defaction` is required.
