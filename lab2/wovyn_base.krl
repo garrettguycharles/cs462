@@ -84,4 +84,18 @@ ruleset wovyn_base {
                 <<#{timestamp} [Temperature violation]: #{temperature} (too high)>>.klog("MESSAGE")
             ) setting(response)
     }
+
+    rule set_config {
+        select when wovyn config
+
+        pre {
+            notification_recipient = event:attrs{"notification_recipient_number"}
+            temperature_threshold = event:attrs{"temperature_threshold"}
+        }
+
+        always {
+            ent:notification_recipient := notification_recipient
+            ent:temperature_threshold := temperature_threshold
+        }
+    }
 }

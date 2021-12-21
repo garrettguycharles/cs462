@@ -1,8 +1,8 @@
 ruleset temperature_store {
 
     meta {
-        provides temperatures, threshold_violations, inrange_temperatures
-        shares temperatures, threshold_violations, inrange_temperatures
+        provides temperatures, threshold_violations, inrange_temperatures, rid, current_temp
+        shares temperatures, threshold_violations, inrange_temperatures, rid, current_temp
     }
 
     global {
@@ -11,6 +11,8 @@ ruleset temperature_store {
             [
               { "name": "__testing" },
               { "name": "temperatures" },
+              { "name": "rid" },
+              { "name": "current_temp" },
               { "name": "threshold_violations" },
               { "name": "inrange_temperatures" }
             ],
@@ -27,6 +29,14 @@ ruleset temperature_store {
 
         temperatures = function() {
             ent:temp_log
+        }
+
+        current_temp = function() {
+            ent:current_temp
+        }
+
+        rid = function() {
+            meta:rid
         }
 
         threshold_violations = function() {
@@ -48,6 +58,7 @@ ruleset temperature_store {
         always {
             ent:temp_log := {}
             ent:temp_violation_log := {}
+            ent:current_temp := 0
         }
     }
 
@@ -61,6 +72,7 @@ ruleset temperature_store {
 
         always {
             ent:temp_log{timestamp} := temperature
+            ent:current_temp := temperature
         }
     }
 
