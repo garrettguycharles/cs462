@@ -1,7 +1,7 @@
 # Lab 2
 
 **Screen Recording**
-<iframe width="560" height="315" src="https://www.youtube.com/embed/InDkLT-37tU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+https://youtu.be/InDkLT-37tU
 
 **What parsing method did you choose?**
 * I don't think I had to do any parsing for this lab.  If you're talking about parsing the event from the Wovyn emitter, that is automatically parsed for me and accessible from event:attrs.
