@@ -10,7 +10,7 @@ https://youtu.be/FDJbLconnjk
 
 ## Questions
 
-**Create a new channel (pick any name and type you like, leave the policy open. **
+**Create a new channel (pick any name and type you like, leave the policy open.**
 * Send an event to the pico using the new channel and the original (default) channel. 
 * **Do you get the same result on both? Why or why not?**
     * I don't get the same result on both channels because on one channel, the "echo" domain is blocked and on another channel, nothing is blocked.
