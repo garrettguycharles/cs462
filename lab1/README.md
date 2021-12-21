@@ -1,4 +1,14 @@
-# Lab 1: Modules and External API calls
+# Lab 1
+
+## Screen Recording
+https://youtu.be/YRbr7lxUJNA
+
+## Links to Rulesets 
+[twilio.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab1/twilio.krl)
+[use_twilio.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab1/use_twilio.krl)
+
+
+## Questions
 
 **Why does this assignment ask you to create a function for messages but an action for sending the SMS message? What's the difference?**
 * In pico KRL, functions are only used for GET operations.  For other operations which will change server-side data, a `defaction` is required.
