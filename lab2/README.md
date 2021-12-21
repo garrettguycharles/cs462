@@ -6,6 +6,8 @@ https://youtu.be/InDkLT-37tU
 ## Links to Rulesets
 [wovyn_base.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab2/wovyn_base.krl)
 
+
+## Questions
 **What parsing method did you choose?**
 * I don't think I had to do any parsing for this lab.  If you're talking about parsing the event from the Wovyn emitter, that is automatically parsed for me and accessible from event:attrs.
 
