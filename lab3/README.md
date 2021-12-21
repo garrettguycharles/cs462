@@ -5,7 +5,6 @@
 https://youtu.be/tQQRY5Unyhc
 
 ## Links to Rulesets
-# TODO
 [temperature_store.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab3/temperature_store.krl)
 
 
