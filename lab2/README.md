@@ -24,6 +24,6 @@
 `raise wovyn event "threshold_violation".klog(<<threshold violation at temp: #{temperature} with threshold: #{ent:temperature_threshold}>>)` which produces this output 
 ```
 {"level":40,"time":"2021-12-21T00:17:08.937Z","picoId":"ckx9quvrc0000btpz9sod0qwy","rid":"wovyn_base","txnId":"ckxfcxwl1005xvipze9nf0ola","val":"threshold_violation","msg":"threshold violation at temp: 74.2 with threshold: 30"}
-```.
+```
 
 I used these lines to display the temperature at which the violation occurred, as well as the threshold that was violated.  If this line is not logged, then there was no violation.
