@@ -17,6 +17,12 @@
 
 
 **Would you say that your find_high_temps rule is an event intermediary? If so, what kind? Justify your answer.**
-
+* This rule is an event intermediary because it doesn't actually carry out any actions on its own, but it can fire another event if some condition is true.  It is a middle-man gateway of sorts.
 
 **How do your logs show that the find_high_temps rule works? Pick out specific lines and explain them.**
+* in `wovyn_base.krl`, on line 63, I have this line of code: 
+```
+raise wovyn event "threshold_violation".klog(<<threshold violation at temp: #{temperature} with threshold: #{ent:temperature_threshold}>>)
+``` which produces this output ```
+{"level":40,"time":"2021-12-21T00:17:08.937Z","picoId":"ckx9quvrc0000btpz9sod0qwy","rid":"wovyn_base","txnId":"ckxfcxwl1005xvipze9nf0ola","val":"threshold_violation","msg":"threshold violation at temp: 74.2 with threshold: 30"}
+```.

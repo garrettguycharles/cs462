@@ -60,7 +60,7 @@ ruleset wovyn_base {
         }
 
         always {
-            raise wovyn event "threshold_violation"
+            raise wovyn event "threshold_violation".klog(<<threshold violation at temp: #{temperature} with threshold: #{ent:temperature_threshold}>>)
             attributes {
                 "temperature": temperature,
                 "timestamp": timestamp
