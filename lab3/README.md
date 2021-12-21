@@ -26,6 +26,6 @@ https://youtu.be/tQQRY5Unyhc
     * Use in the testing tab yields this error: 
     ```
         {
-        "error": "Error: Ruleset temperature_store does not have query function \"temperatures\""
+            "error": "Error: Ruleset temperature_store does not have query function \"temperatures\""
         }
     ```
