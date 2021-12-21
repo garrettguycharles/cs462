@@ -13,7 +13,7 @@
 * After that rule was added, the test pinged my cell phone with a text message.  No directives were returned, because `send_directive` was not called.  Inside the wovyn_base, 3 rules ran: `process_heartbeat`, `find_high_temps`, and `threshold_notification`.
 
 **How do you account for the difference? Diagram the event flow within the pico (i.e. show the event flow from when the pico receives the first event to the directives being created) using a swimlane diagram (Links to an external site.).**
-* What difference?  The difference in behavior?  I would say that it behaves differently because we programmed it to behave differently.  [Sequence diagram:](https://static.swimlanes.io/333954f71ca4c3e5f6fb052ceeb05ba7.png)
+* What difference?  The difference in behavior?  I would say that it behaves differently because we programmed it to behave differently.  ![Sequence diagram](https://static.swimlanes.io/333954f71ca4c3e5f6fb052ceeb05ba7.png)
 
 
 **Would you say that your find_high_temps rule is an event intermediary? If so, what kind? Justify your answer.**
