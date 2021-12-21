@@ -26,7 +26,7 @@ https://youtu.be/tQQRY5Unyhc
 * In this case, the `temperatures()` function would not be callable by the Sky Cloud API, and it would not be usable in the Testing tab.
     * Use in the testing tab yields this error: 
     ```
-{
-  "error": "Error: Ruleset temperature_store does not have query function \"temperatures\""
-}
+        {
+        "error": "Error: Ruleset temperature_store does not have query function \"temperatures\""
+        }
     ```
