@@ -1,8 +1,8 @@
 
-# Lab 3
+# Lab 5
 
 ## Screen Recording
-https://youtu.be/tQQRY5Unyhc
+https://youtu.be/gfuVZK2tmo0
 
 ## Links to Rulesets
 [temperature_store.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab3/temperature_store.krl)
@@ -10,22 +10,14 @@ https://youtu.be/tQQRY5Unyhc
 
 ## Questions
 
-**Explain how the rule collect_temperatures and the temperatures function work as an event-query API.**
-* These two sections of the program form an "event-query API" because one part handles model-changing events, and the other part handles simple queries to get the data without changing it.
-    * `collect_temperatures` is an example of the "event" side of event-query.  Its job is to handle new temperature events and change the "persistent storage" of the entity variables.
-    * the `temperatures` function is an example of the "query" side of event-query.  Its job is to fetch existing temperatures from the "persistent storage".
+**How did your rule that creates the sensor pico install rules in the new child pico?**
+* It did so by sending a Wrangler event requesting that a ruleset be installed into the child pico.
 
-**Explain your strategy for finding temperatures that are in range.**
-* As can be seen in the screen recording, I take the `ent:temp_log`, and then apply a filter which discludes any temperatures which are found in the `ent:temp_violation_log`.  The resulting map of timestamps and temperatures are those which were in range.  Depending on the underlying implementation of a KRL map, this operation seems to run in O(n^2) time, which seems rather slow. But for now it works.
+**How did you ensure that your sensor picos were created before sending them the event telling them their profile was updated?**
+* I sent the ```sensor/profile_updated``` event when I received the ```wrangler/child_initialized``` event.
 
-**What happens if provides doesn't list the name of the temperatures function?**
-* In this case, the `temperatures()` function would be unavailable for use in other modules.
+**How did you create a test harness for your pico system?**
+* I made the __testing object in the globals block.  I also wrote functions that could be used to test my picos.
 
-**What happens if shares doesn't list it?**
-* In this case, the `temperatures()` function would not be callable by the Sky Cloud API, and it would not be usable in the Testing tab.
-    * Use in the testing tab yields this error: 
-    ```
-        {
-            "error": "Error: Ruleset temperature_store does not have query function \"temperatures\""
-        }
-    ```
+**In this set up, the picos representing sensors don't need to talk to each other and the sensor management pico is the parent, so it has channels to each child. How could you provide channels between sensor picos if sensor-to-sensor interaction were necessary?**
+* I would make sure that the parent keeps track of its children's ids, and then send events to each child with information of the sibling it needs to communicate with.

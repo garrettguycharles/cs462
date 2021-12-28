@@ -215,13 +215,13 @@ ruleset manage_sensors {
         )
     
         always {
-            raise sensor event "install_sensor_config_child"
+            raise sensor event "install_wovyn_emitter_child"
                 attributes event:attrs
         }
     }
 
     rule configure_sensor_profile_child {
-        select when sensor install_sensor_config_child
+        select when wrangler child_initialized
 
         pre {
             eci = event:attrs{"eci"}
@@ -242,11 +242,6 @@ ruleset manage_sensors {
                 }
             }
         )
-
-        always {
-            raise sensor event "install_wovyn_emitter_child"
-                attributes event:attrs
-        }
     }
 
     rule install_wovyn_emitter_child {
