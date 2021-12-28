@@ -5,7 +5,17 @@
 https://youtu.be/gfuVZK2tmo0
 
 ## Links to Rulesets
-[temperature_store.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab3/temperature_store.krl)
+[init_channel.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab5/init_channel.krl)
+[manage_sensors.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab5/manage_sensors.krl)
+(See previous labs for:)
+* sensor_profile.krl
+* temperature_store.krl
+* twilio.krl
+* wovyn_base.krl
+* wovyn_emitter.krl
+
+## Diagram of picos:
+![Pico diagram](https://github.com/garrettguycharles/cs462/blob/master/lab5/screenshot.png?raw=true)
 
 
 ## Questions
