@@ -5,14 +5,11 @@
 ***TODO***
 
 ## Links to Rulesets
-[init_channel.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab5/init_channel.krl)
-[manage_sensors.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab5/manage_sensors.krl)
-(See previous labs for:)
-* sensor_profile.krl
-* temperature_store.krl
-* twilio.krl
-* wovyn_base.krl
-* wovyn_emitter.krl
+***I am only including new and edited rulesets.  See the code above for others used in this lab.)***
+* [manager_config.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab6/manager_config.krl)
+* [manage_sensors.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab6/manage_sensors.krl)
+* [wovyn_base.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab6/wovyn_base.krl)
+* [sensor_profile.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab6/sensor_profile.krl)
 
 ## Diagram of picos:
 ![Pico diagram](https://github.com/garrettguycharles/cs462/blob/master/lab6/screenshot.png?raw=true)
