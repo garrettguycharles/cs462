@@ -2,7 +2,7 @@
 # Lab 6
 
 ## Screen Recording
-***TODO***
+https://www.youtube.com/watch?v=YB4w1Q4DXaA
 
 ## Links to Rulesets
 ***I am only including new and edited rulesets.  See the code above for others used in this lab.)***
