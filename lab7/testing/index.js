@@ -24,8 +24,11 @@ class TestHarness {
     }
 }
 
+const MANAGER_PICO_ECI = "cl008wm15009226p51c1vhkjl";
+const SENSOR_PICO_ECI = "cl00br7j602h926p577p8ef0b";
+
 const test_CreateMultipleSensors_andDeleteThem = async () => {
-    const pf = new PicoFacade("cl008wm15009226p51c1vhkjl");
+    const pf = new PicoFacade(MANAGER_PICO_ECI);
 
     const sensors_before_addition = await pf.callFunction("manage_sensors", "get_sensors");
     // console.log(sensors_before_addition);
@@ -77,17 +80,17 @@ const test_CreateMultipleSensors_andDeleteThem = async () => {
 }
 
 const test_CreateOneSensor_andEmitOneTemperatureEvent = async () => {
-    const sensor_pf = new PicoFacade("cl00br7j602h926p577p8ef0b");
+    const sensor_pf = new PicoFacade(SENSOR_PICO_ECI);
 
     const temps_before_addition = await sensor_pf.callFunction("temperature_store", "temperatures");
 
-    console.log(temps_before_addition);
+    // console.log(temps_before_addition);
 
     await sensor_pf.raiseEvent("emitter", "new_sensor_reading");
 
     const temps_after_addition = await sensor_pf.callFunction("temperature_store", "temperatures");
 
-    console.log(temps_after_addition);
+    // console.log(temps_after_addition);
 
     const size_before = Object.keys(temps_before_addition).length;
     const size_after = Object.keys(temps_after_addition).length;
@@ -116,10 +119,10 @@ function randomInt(min, max) {
 }
 
 const test_SetSensorProfile = async () => {
-    const sensor_pf = new PicoFacade("cl00br7j602h926p577p8ef0b");
+    const sensor_pf = new PicoFacade(SENSOR_PICO_ECI);
 
     const profile_before_change = await sensor_pf.callFunction("sensor_profile", "get_profile");
-    console.log(profile_before_change);
+    // console.log(profile_before_change);
 
     const new_profile = {
         "name": randomStringOfLength(10),
