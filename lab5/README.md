@@ -3,6 +3,7 @@
 
 ## Screen Recording
 https://youtu.be/gfuVZK2tmo0
+https://www.youtube.com/watch?v=jLZzZCAAkl4 (explanation of testing)
 
 ## Links to Rulesets
 [init_channel.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab5/init_channel.krl)
