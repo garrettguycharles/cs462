@@ -6,9 +6,9 @@ https://youtu.be/YG-onuaMbC0
 
 ## Links to Rulesets
 ***I am only including new and edited rulesets.  See the code above for others used in this lab.)***
-* [manage_sensors.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab7/manage_sensors.krl)
-* [sensor_profile.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab6/sensor_profile.krl)
-* [temperature_store.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab7/temperature_store.krl)
+* [gossip.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab8/gossip.krl)
+* [gossip_manager.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab8/gossip_manager.krl)
+* [sensor_manager.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab8/sensor_manager.krl)
 
 ## Questions
 
