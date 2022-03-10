@@ -1,0 +1,21 @@
+1. What is the role of the master?
+	- The role of the master is to give assignments to each mapper, and make sure that each component of the process knows how to pass information on to the next component (Mappers to groupers, groupers to reducers, reducers back to master).
+2. What is the role of the mapper?
+	- Mappers extract information from bulk data.
+3. How does the mapper role differ from the role of the reducer?
+	- The mapper doesn't care what the data means, it just knows which data it has been asked to collect.  The reducer actually makes sense of the data.
+4. Why is the work of the grouper tough in this exercise?
+	- The grouper has to take jumbled data and sort it so that it can be processed further, and sorting is always a tough task.
+5. What work happened independently?
+	- Mappers collecting and extracting data.
+6. What work was dependent on other work?
+	- Everything after the mappers relied upon the mappers, to some degree.  Once the mappers got started, then work started flowing down through the groupers and reducers, but each link in the chain was dependent upon the previous link to provide them with their next bit of data to process.
+7. How much longer would it take to count all the occurrences of every proper noun in the Book of Mormon, assuming you had enough workers to assign a chapter to each and increase the reducers proportionally?
+	- If by "workers", you mean both mappers and groupers, then the task would only take as long as the longest chapter would take by itself to count all proper nouns, which would be longer because of the time it would take to record extra instances of the words.  But if we weren't able to increase the number of groupers, then that would be a bottleneck, and the process would take longer, because no matter how many reducers there were, the groupers would still take more time to sort the data.
+8. How would you apply this method to
+	1. Grouping words by length
+		- Same algorithm, except give the groupers a different strategy for grouping data among reducers, and give reducers the task of grouping words by length instead of content.
+	2. Find all verses that mention a specific word
+		- Mappers collect verses which mention that word, hand them to groupers, reducers collect verses according to which word was found.
+	3. Count URL accesses for a large Web site with 1000s of servers
+		- Mappers collect access counts from each server, hand them to groupers who group by URL, and then the reducers count each URL's total accesses.

@@ -1,0 +1,28 @@
+Go to Amazon.com. Observe the URLs as you click through the site. Critique the URL design.
+
+I would say that Amazon's URI design works incredibly well, considering that this is Amazon we're talking about. Amazon uses query strings a little bit like Google does, to track users without having to keep detailed records of site interaction on the back-end.  (Perhaps they give each search query a tag to remember which page of results was last returned from the server, and then send back that tag when the next page is requested.  They just chose to put those tags in the URI.)  Other than that, the URI scheme seems understandable.  In this example: https://www.amazon.com/Legend-Zelda-Breath-Wild-Creating-Champion/dp/1506710115/ref=sr_1_1_sspa?crid=1BLSSVBQ9E6JV&keywords=zelda&qid=1642629375&sprefix=zeld%2Caps%2C196&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEzUE8wTU00RzlLN1pYJmVuY3J5cHRlZElkPUEwNzk0MDM5MkI4UUJCMlVOU1NEVSZlbmNyeXB0ZWRBZElkPUEwOTk2Njc1OVhHTUpTNkJENENMJndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==
+, the title of the product is prominently featured after amazon.com/ in the URL.  So if I clicked on this link, I would have a pretty good idea of what it would lead me to.
+
+byu.edu
+
+I think byu's URI design is pretty close to what Mr. Berners-Lee was trying to describe: when I go to a news article, such as
+https://news.byu.edu/intellect/kids-who-learn-money-management-from-parents-do-better-financially-relationally-according-to-new-byu-research
+it is pretty clear what this URI will lead me to if I follow it.  It doesn't have any changing information in the URI.
+
+Salt Lake Tribune
+
+I would say that sltrib.com is not a very clear domain name.  It is short, however, which might end up paying off in search engine optimization.  It might be more complete to call it sltribune or saltlaketribune.   Other than that, their news articles are organized by date, which Mr. Berners-Lee was a fan of.  For example, https://www.sltrib.com/news/politics/2022/01/19/new-bill-would-officially/
+However, as can be seen from the end of this URI, it is difficult to know what this article will be before following the link.  So perhaps the URI could be adjusted to include more identifying info, such as the entire title of the article instead of the first 4 words.
+
+Does site functionality use a GET or POST?
+- For Amazon, It looks like they use GETs for what would be considered "pages" and POSTs for things like the "add to cart" button.
+Are the URLs readable? Is that good or bad?
+- See above.  They have the title of the item in them, but past that it is just a bunch of gibberish that is meaningful to the back-end somehow.
+What would happen if Amazon regularly changed their URLs? Would their sales increase or decrease?
+- They don't change their URLs, but they do change the query strings.  Their base URLs stay the same, and if those changed, their sales would decrease because more customers would get lost in the redirections, or they wouldn't be able to find their products.
+Does LearningSuite let you link to a quiz?
+- Probably not.  It wouldn't make much sense to allow this. It does let you link to the page that gives you the options of starting a quiz, but I don't have any quizzes I can start on LearningSuite just for the sake of testing this.
+How does Amazon's use of a GET for almost everything give them a "free ride" to some extent?
+- I would say that this allows them to have the client store whatever information needs to be tracked, and then present it to the server for processing whenever any extra requests are made.  This frees up back-end storage space.
+How might Google make use of good URI design by other Web sites?
+- I don't think Google needs to worry about that, they've been pretty successful doing a similar thing that Amazon does with their search query string URIs.

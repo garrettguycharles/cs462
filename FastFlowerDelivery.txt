@@ -1,0 +1,115 @@
+Primary user stories:
+
+1. Store owner requests flower delivery from driver with 4+ star rating, address at 123 FlowerOrder St., pick up time ASAP, and delivery time 15 minutes.
+
+2. Driver submits bid for delivery job
+
+3. Store owner selects driver from bids and/or driver is assigned a delivery job
+
+4. Flower recipient confirms delivery time.
+
+Data model:
+object Delivery: {
+  "id": string,
+  "vendorId": string,
+  "timestamp": long,
+  "pickUpAddress": string,
+  "pickUpTime": long (timestamp),
+  "deliveryAddress": string,
+  "requestedDeliveryTime": long (timestamp),
+  "assignedDriverId": string | undefined,
+  "status": number (0=unassigned, 1=assigned, 2=in_transit, 3=delivered),
+  "assignmentStrategy": number (0=automatic, 1=choose_from_bid),
+  "driverRankingThreshold": number (0 <= number <= 5),
+  "actualDeliveryTime": long (timestamp) | undefined,
+  "actualPickupTime": long (timestamp) | undefined
+}
+
+object Vendor: {
+  "id": string,
+  "name": string,
+  "billingAddress": string,
+  ...other fields to identify a business. (Unused in this example.)
+}
+
+object Driver: {
+  "id": string,
+  "defaultAddress": string,
+  "active": boolean,
+  "lastReportedLocation": string (longitude & latitude),
+  "score": number (0 <= number <= 5)
+}
+
+object DeliveryBids: {
+  "deliveryJobId": string,
+  "bids": List<DeliveryBid>
+}
+
+object DeliveryBid: {
+  "id": string,
+  "deliveryJobId": string,
+  "driverId": string
+}
+
+API design:
+
+POST /api/vendor/request-delivery
+req body {
+  "vendorId": string,
+  "pickUpAddress": string,
+  "pickUpTime": long (timestamp),
+  "deliveryAddress": string,
+  "requestedDeliveryTime": long (timestamp),
+  "assignmentStrategy": number (0=automatic, 1=choose_from_bid),
+  "driverRankingThreshold": number (0 <= number <= 5),
+}
+
+res body {
+  "success": boolean,
+  "details": string,
+  "delivery": Delivery
+}
+
+POST /api/delivery/place-bid
+req body {
+  "deliveryJobId": string,
+  "driverId": string
+}
+
+res body {
+  "success": boolean,
+  "details": string
+}
+
+POST /api/delivery/get-bids
+req body {
+  "deliveryJobId": string
+}
+
+res body {
+  "success": boolean,
+  "details": string,
+  "bids": DeliveryBids
+}
+
+POST /api/delivery/assign-driver
+req body {
+  "deliveryJobId": string,
+  "driverId": string
+}
+
+res body {
+  "success": boolean,
+  "details": string
+}
+
+POST /api/delivery/confirm-delivery-time
+req body {
+  "deliveryJobId": string,
+  "deliveryTime": long (timestamp)
+}
+
+res body {
+  "success": boolean,
+  "details": string
+}

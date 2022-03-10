@@ -1,0 +1,29 @@
+1. What is the IP address for www.windley.com?
+    54.208.148.219
+
+2. Conduct a trace of the DNS lookup and tell me the number of root servers, TLD servers and zone servers exist for windley.com. (Note this is different than doing a trace route on the name.)
+    root: 13, TLD: 13, zone: 4
+
+3. What are the names of the zone servers for windley.com?
+    ns-cloud-b1.googledomains.com.
+    ns-cloud-b2.googledomains.com.
+    ns-cloud-b3.googledomains.com.
+    ns-cloud-b4.googledomains.com.
+
+4. What are the TLD servers for the .io domain?
+    a2.nic.io.
+    b0.nic.io.
+    c0.nic.io.
+    a0.nic.io.
+
+5. What is the message in the TXT field of the DNS record for windley.com?
+    "keybase-site-verification=K3p7AKx0AY9kPRNxCePkFWZ4oP-HOY_mTf3wcEwO7ZM"
+
+6. What is an SOA record?
+    Start of Authority record.  Stores important information about a domain or zone such as the email address of the administrator, when the domain was last updated, and how long the server should wait between refreshes.
+
+7. According to the SOA record, what is the serial number for windley.com?
+    28
+
+8. What is the recommended refresh period for windley.com?
+    21600

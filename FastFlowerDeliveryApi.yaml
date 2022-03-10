@@ -1,0 +1,303 @@
+openapi: 3.0.0
+info:
+  description: "This is the specification for a mock API for a flower delivery service."
+  version: "0.0.0.1"
+  title: "Fast Flower Delivery"
+  license:
+    name: "All Rights Reserved"
+
+components:
+  schemas:
+    Delivery:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        vendorId:
+          type: "string"
+        timestamp:
+          type: "integer"
+          format: "int128"
+        pickUpAddress:
+          type: "string"
+        pickUpTime:
+          type: "integer"
+          format: "int128"
+        deliveryAddress:
+          type: "string"
+        requestedDeliveryTime:
+          type: "integer"
+          format: "int128"
+        assignedDriverId:
+          type: "string"
+        status:
+          type: "string"
+          enum:
+          - "unassigned"
+          - "assigned"
+          - "in_transit"
+          - "completed"
+        assignmentStrategy:
+          type: "string"
+          enum:
+          - "automatic"
+          - "choose_from_bid"
+        driverRankingThreshold: 
+          type: "number"
+        actualDeliveryTime:
+          type: "integer"
+          format: "int128"
+        actualPickupTime:
+          type: "integer"
+          format: "int128"
+          
+    Driver:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        defaultAddress:
+          type: "string"
+        active:
+          type: "boolean"
+        lastReportedLocation:
+          type: "string"
+        score:
+          type: "number"
+          
+    Vendor:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        billingAddress:
+          type: "string"
+          
+    DeliveryBid:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        deliveryJobId:
+          type: "string"
+        driverId:
+          type: "string"
+          
+    DeliveryBids:
+      type: "object"
+      properties:
+        deliveryJobId:
+          type: string
+        bids:
+          type: "array"
+          items: 
+            $ref: '#/components/schemas/DeliveryBid'
+            
+    BasicResponseBody:
+      type: object
+      properties:
+        success:
+          type: boolean
+        details:
+          type: string
+            
+    RequestDeliveryRequestBody:
+      type: object
+      properties:
+        vendorId:
+          type: string
+        pickUpAddress:
+          type: string
+        pickUpTime:
+          type: "integer"
+          format: "int128"
+        deliveryAddress:
+          type: string
+        requestedDeliveryTime:
+          type: "integer"
+          format: "int128"
+        assignmentStrategy:
+          type: string
+        driverRankingThreshold:
+          type: string
+          
+    RequestDeliveryResponseBody:
+      type: object
+      properties:
+        success: 
+          type: boolean
+        details: 
+          type: string
+        delivery:
+          $ref: '#/components/schemas/Delivery'
+    
+    PlaceBidRequestBody:
+      type: object
+      properties:
+        deliveryJobId:
+          type: string
+        driverId:
+          type: string
+          
+          
+    PlaceBidResponseBody:
+      $ref: '#/components/schemas/BasicResponseBody'
+      
+    GetBidsRequestBody:
+      type: object
+      properties:
+        deliveryJobId:
+          type: string
+      
+    GetBidsResponseBody:
+      type: object
+      properties:
+        success:
+          type: boolean
+        details:
+          type: string
+        bids:
+          $ref: '#/components/schemas/DeliveryBids'
+          
+    AssignDriverRequestBody:
+      type: object
+      properties:
+        deliveryJobId:
+          type: string
+        driverId:
+          type: string
+    
+    AssignDriverResponseBody:
+      $ref: '#/components/schemas/BasicResponseBody'
+      
+    ConfirmDeliveryTimeRequestBody:
+      type: object
+      properties:
+        deliveryJobId:
+          type: string
+        deliveryTime:
+          type: "integer"
+          format: "int128"
+    
+    ConfirmDeliveryTimeResponseBody:
+      $ref: '#/components/schemas/BasicResponseBody'
+        
+
+paths:
+  /api/vendor/request-delivery:
+    post:
+      tags:
+      - "vendor"
+      summary: "Create a new delivery request."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestDeliveryRequestBody'
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestDeliveryResponseBody'
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Internal Server Error"
+          
+  /api/delivery/place-bid:
+    post:
+      tags:
+      - "delivery"
+      summary: "Place a bid (as a driver) on an available delivery job."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaceBidRequestBody'
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaceBidResponseBody'
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Internal Server Error"
+          
+  /api/delivery/get-bids:
+    post:
+      tags:
+      - "delivery"
+      summary: "Retrieve a list of bids for specified delivery job."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBidsRequestBody'
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBidsResponseBody'
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Internal Server Error"
+          
+  /api/delivery/assign-driver:
+    post:
+      tags:
+      - "delivery"
+      summary: "(As a vendor) Assign a driver to a delivery."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignDriverRequestBody'
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssignDriverResponseBody'
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Internal Server Error"
+  
+  /api/delivery/confirm-delivery-time:
+    post:
+      tags:
+      - "delivery"
+      summary: "(As a customer) Confirm the time that the delivery was completed."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmDeliveryTimeRequestBody'
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfirmDeliveryTimeResponseBody'
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Internal Server Error"
+  
