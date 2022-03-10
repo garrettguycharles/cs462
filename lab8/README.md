@@ -8,7 +8,7 @@ https://youtu.be/YG-onuaMbC0
 ***I am only including new and edited rulesets.  See the code above for others used in this lab.)***
 * [gossip.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab8/gossip.krl)
 * [gossip_manager.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab8/gossip_manager.krl)
-* [sensor_manager.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab8/sensor_manager.krl)
+* [manage_sensors.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab8/manage_sensors.krl)
 
 ## Questions
 
