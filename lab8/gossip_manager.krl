@@ -38,28 +38,27 @@ ruleset gossip_manager {
 
     rule setDelay {
         select when gossip set_delay
-        foreach get_scheduled_events() setting (e)
+        foreach get_node_channels() setting (channel)
 
-        pre {
-            id = e{"id"}.defaultsTo("")
-        }
-
-        every {
-            schedule:remove(id)
-        }
-
-        always {
-            ent:repeat_delay := event:attrs{"delay"} on final
-            schedule node event "force_send_message" repeat <<*/#{ent:repeat_delay}  *  * * * *>> on final
-        }
+        event:send({
+            "eci": channel,
+            "domain": "gossip",
+            "name": "set_delay",
+            "attrs": {"delay": event:attrs{"delay"}}
+        })
     }
 
     rule startGossip {
         select when gossip start
 
-        always {
-            schedule node event "force_send_message" repeat "*/5  *  * * * *"
-        }
+        foreach get_node_channels() setting (channel)
+
+        event:send({
+            "eci": channel,
+            "domain": "gossip",
+            "name": "start",
+            "attrs": {}
+        })
     }
 
     rule forceGossip {

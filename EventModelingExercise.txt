@@ -1,0 +1,23 @@
+Assume the following event streams:
+
+1. Twitter stream (tweet:received) with attributes body and from
+2. Email IMAP account (email:received, email:sent, email:forwarded) with attributes, to, from, subj, and body
+3. Stock price update stream (stock:update) with attributes ticker, price, change, percent, and name
+4. Web pageview (web:pageview) with attributes url, title, and referer.
+
+Write event expressions that select the following:
+
+1. Tweets containing the keyword "healthcare"
+   - select when tweet received body re#healthcare
+2. Emails received with a subject containing the words "BYU" and "football" in any order
+   - select when email:received subj re#BYU# re#football#
+3. Four tweets with the keyword "healthcare" within 4 hours
+   - select when count 4 (tweet received body re#healthcare#) within 4 hours
+4. Tweet with keyword "healthcare" followed by an email with "healthcare" in the body or subject
+   - select when tweet received body re#healthcare# before email received where (event:attrs{"subj"}.match(re#healthcare#) or event:attrs{"body"}.match(re#healthcare#))
+5. More than five emails from the same person within a 20-minute period
+   - select when count 6 (email received from re#.*#) push(origins) within 20 minutes
+6. Tweets that contain a stock-ticker symbol and the price of that same stock goes up by more than 2 percent within 10 minutes
+   - select when stock update ticker re#.*# where event:attrs{"percent"} > 2 setting(stock) before tweet received where event:attrs{"body"} == stock
+7. User visits any two of Google, Yahoo!, MSNBC, CNN, or KSL.
+   - select when any 2 (web pageview url re#google#, web pageview url re#yahoo#, web pageview url re#msnbc#, web pageview url re#cnn#, web pageview url re#ksl#)

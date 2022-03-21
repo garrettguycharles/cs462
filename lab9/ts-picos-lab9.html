@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <style>
+    .violation {
+      color: red;
+    }
+
+    .grid {
+      display: grid;
+      width: 100%;
+      grid-template: auto / repeat(3, 1fr);
+    }
+  </style>
+
+  <div class="grid">
+    <h2>Sensor 1</h2>
+    <h2 id="sensor1-temp">Temp</h2>
+    <h2 id="sensor1-count">Count</h2>
+
+    <h2>Sensor 2</h2>
+    <h2 id="sensor2-temp">Temp</h2>
+    <h2 id="sensor2-count">Count</h2>
+
+    <h2>Sensor 3</h2>
+    <h2 id="sensor3-temp">Temp</h2>
+    <h2 id="sensor3-count">Count</h2>
+
+    <h2>Sensor 4</h2>
+    <h2 id="sensor4-temp">Temp</h2>
+    <h2 id="sensor4-count">Count</h2>
+  </div>
+
+
+  <script>
+    const s1_temp = document.getElementById("sensor1-temp");
+    const s2_temp = document.getElementById("sensor2-temp");
+    const s3_temp = document.getElementById("sensor3-temp");
+    const s4_temp = document.getElementById("sensor4-temp");
+
+    const s1_count = document.getElementById("sensor1-count");
+    const s2_count = document.getElementById("sensor2-count");
+    const s3_count = document.getElementById("sensor3-count");
+    const s4_count = document.getElementById("sensor4-count");
+
+
+    async function fetchTemperatures() {
+      const baseURL = "http://localhost:5000/api/sky/query";
+      const rulesetName = "SensorPicoRuleset";
+      const tempFuncName = "queryCurrentTemperature";
+      const countFuncName = "querySystemViolationCount";
+
+      // get Pico1 info
+      const s1_t = await (await fetch(`${baseURL}/default1/${rulesetName}/${tempFuncName}`)).json();
+
+      s1_temp.innerHTML = s1_t.temperature;
+      if (s1_t.temperature > s1_t.current_threshold) {
+        s1_temp.classList.add("violation");
+      } else {
+        s1_temp.classList.remove("violation");
+      }
+
+      const s1_c = await (await fetch(`${baseURL}/default1/${rulesetName}/${countFuncName}`)).json();
+      s1_count.innerHTML = s1_c;
+
+      // get Pico2 info
+      const s2_t = await (await fetch(`${baseURL}/default2/${rulesetName}/${tempFuncName}`)).json();
+
+      s2_temp.innerHTML = s2_t.temperature;
+      if (s2_t.temperature > s2_t.current_threshold) {
+        s2_temp.classList.add("violation");
+      } else {
+        s2_temp.classList.remove("violation");
+      }
+
+      const s2_c = await (await fetch(`${baseURL}/default2/${rulesetName}/${countFuncName}`)).json();
+      s2_count.innerHTML = s2_c;
+
+      // get Pico3 info
+      const s3_t = await (await fetch(`${baseURL}/default3/${rulesetName}/${tempFuncName}`)).json();
+
+      s3_temp.innerHTML = s3_t.temperature;
+      if (s3_t.temperature > s3_t.current_threshold) {
+        s3_temp.classList.add("violation");
+      } else {
+        s3_temp.classList.remove("violation");
+      }
+
+      const s3_c = await (await fetch(`${baseURL}/default3/${rulesetName}/${countFuncName}`)).json();
+      s3_count.innerHTML = s3_c;
+
+      // get Pico4 info
+      const s4_t = await (await fetch(`${baseURL}/default4/${rulesetName}/${tempFuncName}`)).json();
+
+      s4_temp.innerHTML = s4_t.temperature;
+      if (s4_t.temperature > s4_t.current_threshold) {
+        s4_temp.classList.add("violation");
+      } else {
+        s4_temp.classList.remove("violation");
+      }
+
+      const s4_c = await (await fetch(`${baseURL}/default4/${rulesetName}/${countFuncName}`)).json();
+      s4_count.innerHTML = s4_c;
+    }
+
+    setInterval(fetchTemperatures, 500);
+  </script>
+</body>
+</html>

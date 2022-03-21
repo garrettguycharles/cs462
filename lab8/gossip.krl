@@ -4,11 +4,15 @@ ruleset gossip {
         use module io.picolabs.wrangler alias wrangler
         use module io.picolabs.subscription alias subscription
 
-        shares get_id, isProcessingMessages, get_peers, get_message_number, get_seen_record, get_seen_messages, getNumberFromMessageId, getOriginFromMessageId, getSeenMessageToSend, getPeerForSeenMessage, getNewMessagesToSendToPeer, get_node_id, get_scheduled_events
-        provides get_id, isProcessingMessages, get_peers, get_message_number, get_seen_record, get_seen_messages, getNumberFromMessageId, getOriginFromMessageId, getSeenMessageToSend, getPeerForSeenMessage, getNewMessagesToSendToPeer, get_node_id, get_scheduled_events
+        shares get_id, get_delay, isProcessingMessages, get_peers, get_message_number, get_seen_record, get_seen_messages, getNumberFromMessageId, getOriginFromMessageId, getSeenMessageToSend, getPeerForSeenMessage, getNewMessagesToSendToPeer, get_node_id, get_scheduled_events
+        provides get_id, get_delay, isProcessingMessages, get_peers, get_message_number, get_seen_record, get_seen_messages, getNumberFromMessageId, getOriginFromMessageId, getSeenMessageToSend, getPeerForSeenMessage, getNewMessagesToSendToPeer, get_node_id, get_scheduled_events
     }
 
     global {
+
+        get_delay = function() {
+            ent:repeat_delay
+        }
 
         get_scheduled_events = function() {
             schedule:list()
@@ -100,8 +104,34 @@ ruleset gossip {
             ent:seen_record := {}
             ent:seen_messages := {}
             ent:processing_messages := true
-            ent:message_timer := time:now()
+            ent:repeat_delay := 5
             // raise node event "send_message_to_peer" // begin communications
+        }
+    }
+
+    rule setDelay {
+        select when gossip set_delay
+        foreach get_scheduled_events() setting (e)
+
+        pre {
+            id = e{"id"}.defaultsTo("")
+        }
+
+        every {
+            schedule:remove(id)
+        }
+
+        always {
+            ent:repeat_delay := event:attrs{"delay"} on final
+            schedule node event "send_message_to_peer" repeat <<*/#{ent:repeat_delay}  *  * * * *>> on final
+        }
+    }
+
+    rule startGossip {
+        select when gossip start
+
+        always {
+            schedule node event "send_message_to_peer" repeat <<*/#{ent:repeat_delay}  *  * * * *>> on final
         }
     }
 
@@ -224,7 +254,6 @@ ruleset gossip {
                 "timestamp": timestamp
             }) if ent:processing_messages
 
-            // ent:seen_messages{message_origin} := ent:seen_messages{message_origin}.put("highest_seen", message_number.decode()) if message_number.decode() == ent:seen_messages{message_origin}{"highest_seen"} + 1
             raise node event "increment_highest_seen" attributes {
                 "message_origin": message_origin
             } if ent:processing_messages
@@ -287,7 +316,6 @@ ruleset gossip {
             origin = key
             seen_map = event:attrs{"seen"}
             highest_seen = seen_map{key}
-            // should_increment = get_seen_record(){peer}.defaultsTo({}){origin}.defaultsTo(-1) < highest_seen
         }
 
 
@@ -334,29 +362,6 @@ ruleset gossip {
 
         always {
             raise gossip event "send_seen_message" if ent:processing_messages
-            // raise sched event "cls"
         }
     }
-
-    // rule threshold_notification {
-    //     select when wovyn threshold_violation
-    //     pre {
-    //         temperature = event:attrs{"temperature"}.klog("Temp violation.  Sending message.  Temp:")
-    //         timestamp = event:attrs{"timestamp"}
-    //     }
-
-        
-    //     if temperature && timestamp then
-    //         // twilio:send_sms(
-    //         //     ent:notification_recipient, 
-    //         //     ent:notification_sender_number, 
-    //         //     <<#{timestamp} [Temperature violation]: #{temperature} (too high)>>.klog("MESSAGE")
-    //         // ) setting(response)
-    //         event:send({
-    //             "eci": ent:managerTx.klog("MANAGERTX"),
-    //             "domain": "sensor",
-    //             "name": "threshold_violation",
-    //             "attrs": event:attrs
-    //         })
-    // }
 }
