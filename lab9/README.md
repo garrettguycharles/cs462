@@ -5,10 +5,9 @@
 https://www.youtube.com/watch?v=86EB2rNY940
 
 ## Links to Rulesets
-***I am only including new and edited rulesets.  See the code above for others used in this lab.)***
-* [gossip.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab8/gossip.krl)
-* [gossip_manager.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab8/gossip_manager.krl)
-* [manage_sensors.krl](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab8/manage_sensors.krl)
+* [GossipNodeRuleset.ts](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab9/src/entities/rulesets/standard/GossipNodeRuleset.ts)
+* [WovynEmulatorRuleset.ts](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab9/src/entities/rulesets/lab9/WovynEmulatorRuleset.ts)
+* [SensorPicoRuleset.ts](https://raw.githubusercontent.com/garrettguycharles/cs462/master/lab9/src/entities/rulesets/lab9/SensorPicoRuleset.ts)
 
 ## Questions
 
